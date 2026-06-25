@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PopSight Agent Intelligence</title>
+  <meta name="description" content="PopSight Agent Intelligence — Hack the Coast 2026 winning sourcing copilot project." />
+  <style>
+    :root {
+      --bg: #0b1020;
+      --panel: rgba(255, 255, 255, 0.07);
+      --line: rgba(255, 255, 255, 0.12);
+      --text: #e9eefc;
+      --muted: #b8c1da;
+      --accent: #8ab4ff;
+      --accent-2: #7ef0c2;
+      --shadow: 0 20px 60px rgba(0, 0, 0, 0.32);
+      --radius: 22px;
+      --maxw: 1040px;
+      --font: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: var(--font);
+      color: var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(138, 180, 255, 0.18), transparent 30%),
+        radial-gradient(circle at top right, rgba(126, 240, 194, 0.12), transparent 26%),
+        linear-gradient(180deg, #0b1020 0%, #0c1429 100%);
+      min-height: 100vh;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+
+    .wrap {
+      max-width: var(--maxw);
+      margin: 0 auto;
+      padding: 28px 20px 56px;
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 10px 0 26px;
+      flex-wrap: wrap;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 700;
+    }
+
+    .brand-mark {
+      width: 40px;
+      height: 40px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      box-shadow: 0 10px 26px rgba(138, 180, 255, 0.25);
+      display: grid;
+      place-items: center;
+      color: #08101f;
+      font-weight: 900;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .nav-links a:hover { color: var(--text); }
+
+    .panel {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+    }
+
+    .hero {
+      padding: 30px;
+      display: grid;
+      gap: 18px;
+      margin-bottom: 18px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      width: fit-content;
+      align-items: center;
+      gap: 10px;
+      font-size: 13px;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      width: fit-content;
+      gap: 8px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid var(--line);
+      color: var(--text);
+      font-size: 13px;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(34px, 5vw, 58px);
+      line-height: 0.98;
+      letter-spacing: -0.05em;
+    }
+
+    .subtitle {
+      margin: 0;
+      font-size: 17px;
+      line-height: 1.7;
+      color: var(--muted);
+      max-width: 70ch;
+    }
+
+    .cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 8px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 12px 16px;
+      border-radius: 14px;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.06);
+      color: var(--text);
+      font-weight: 600;
+      transition: transform 0.15s ease, background 0.15s ease, border-color 0.15s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+      background: rgba(255, 255, 255, 0.1);
+      border-color: rgba(255, 255, 255, 0.22);
+    }
+
+    .btn.primary {
+      background: linear-gradient(135deg, rgba(138, 180, 255, 0.96), rgba(126, 240, 194, 0.92));
+      color: #09111f;
+      border-color: transparent;
+    }
+
+    section { margin-top: 18px; }
+
+    .section-title {
+      margin: 0 0 12px;
+      font-size: 22px;
+      letter-spacing: -0.03em;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .card {
+      padding: 20px;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    .card h3 { margin: 0 0 10px; font-size: 18px; }
+
+    .card p, .card li {
+      color: var(--muted);
+      line-height: 1.65;
+      margin: 0;
+      font-size: 15px;
+    }
+
+    .card ul {
+      margin: 0;
+      padding-left: 18px;
+      display: grid;
+      gap: 8px;
+    }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 16px;
+    }
+
+    .media-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+
+    .media-item {
+      overflow: hidden;
+      border-radius: 20px;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.06);
+    }
+
+    .media-item img {
+      width: 100%;
+      height: auto;
+      display: block;
+      aspect-ratio: 16 / 10;
+      object-fit: cover;
+      background: rgba(255, 255, 255, 0.04);
+    }
+
+    .media-item .meta { padding: 14px 16px; }
+    .media-item .meta strong { display: block; margin-bottom: 6px; font-size: 15px; }
+
+    .embed {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      overflow: hidden;
+      border-radius: 18px;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    .embed iframe {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
+    .footer {
+      margin-top: 26px;
+      padding: 16px 0 6px;
+      color: var(--muted);
+      font-size: 13px;
+      text-align: center;
+    }
+
+    .small { font-size: 13px; color: var(--muted); line-height: 1.6; }
+
+    @media (max-width: 900px) {
+      .grid-3, .two-col, .media-grid { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 640px) {
+      .wrap { padding: 18px 14px 40px; }
+      .hero { padding: 22px; }
+      h1 { font-size: clamp(32px, 10vw, 50px); }
+      .subtitle { font-size: 16px; }
+      .btn { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header class="nav">
+      <div class="brand">
+        <div class="brand-mark">P</div>
+        <div>
+          <div>PopSight Agent Intelligence</div>
+          <div class="small">Hack the Coast 2026 winning project</div>
+        </div>
+      </div>
+      <nav class="nav-links">
+        <a href="#overview">Overview</a>
+        <a href="#role">My Role</a>
+        <a href="#architecture">Architecture</a>
+        <a href="#media">Media</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="panel hero">
+        <div class="eyebrow">Portfolio Project</div>
+        <div class="pill">Team hackathon project · Winner, Prince of Peace AI Product Discovery & Trend Intelligence Track</div>
+        <h1>AI sourcing copilot for product discovery and market intelligence</h1>
+        <p class="subtitle">
+          PopSight is a full-stack consumer packaged goods sourcing workspace that helps teams discover trending products,
+          analyze market signals, and chat with a grounded copilot over catalog, vendor, inventory, and sales-history data.
+          I focused on the memory and retrieval pieces inside the conversational copilot module for the winning hackathon build.
+        </p>
+        <div class="cta-row">
+          <a class="btn primary" href="https://www.youtube.com/watch?v=ApefYO0QeSg" target="_blank" rel="noreferrer">Watch Demo</a>
+          <a class="btn" href="https://github.com/ZhanLiQxQ/popsight" target="_blank" rel="noreferrer">Team Repository</a>
+          <a class="btn" href="popsight-presentation.pdf" target="_blank" rel="noreferrer">Presentation PDF</a>
+        </div>
+      </section>
+
+      <section id="overview">
+        <h2 class="section-title">Overview</h2>
+        <div class="grid-3">
+          <div class="card">
+            <h3>What it does</h3>
+            <p>
+              PopSight helps sourcing teams discover products, surface trends, and ask questions over grounded company data.
+              The system combines retrieval, memory, and tool use so the assistant can respond with context instead of generic LLM output.
+            </p>
+          </div>
+          <div class="card">
+            <h3>Outcome</h3>
+            <p>
+              The project won the Prince of Peace AI Product Discovery & Trend Intelligence track at Hack the Coast 2026.
+            </p>
+          </div>
+          <div class="card">
+            <h3>My focus</h3>
+            <p>
+              I focused on the conversational copilot’s memory and retrieval behavior: durable memory controls, current-session context, and RAG over internal company data.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section id="role">
+        <h2 class="section-title">My Role</h2>
+        <div class="two-col">
+          <div class="card">
+            <h3>Owned area: conversational sourcing copilot</h3>
+            <ul>
+              <li>Built the memory CRUD behavior for durable long-term memory entries and conversational memory state.</li>
+              <li>Worked on the LangGraph-based multi-tool agent for current scan context, product lookup, recent-conversation search, memory save/search/delete, and Qdrant retrieval.</li>
+              <li>Implemented the memory layer used for short-term session state and long-term sourcing preferences, supplier notes, and strategic decisions.</li>
+              <li>Built the ingestion workflow for catalog, vendor, inventory, and sales-history documents into Qdrant.</li>
+              <li>Added deterministic demo fallbacks so the app remained usable during hackathon judging even when rate limits or missing keys caused failures.</li>
+              <li>Presented the project during judging and answered the higher-level product and deployment questions from sponsors and evaluators.</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>What the rest of the team handled</h3>
+            <ul>
+              <li>Product fetch and compliance signal extraction.</li>
+              <li>Trend interpretation and product discovery graph.</li>
+              <li>Shared full-stack integration and demo coordination.</li>
+            </ul>
+            <p class="small" style="margin-top:14px;">
+              This separation keeps the page accurate and avoids claiming ownership of the full system.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section id="architecture">
+        <h2 class="section-title">Architecture</h2>
+        <div class="grid-3">
+          <div class="card">
+            <h3>Backend</h3>
+            <p>FastAPI service exposing scanning, chat, memory, and retrieval endpoints.</p>
+          </div>
+          <div class="card">
+            <h3>Knowledge Layer</h3>
+            <p>Qdrant vector retrieval over chunked company documents, plus structured metadata in PostgreSQL.</p>
+          </div>
+          <div class="card">
+            <h3>Agent Layer</h3>
+            <p>LangGraph orchestration with tool calling, session state, and long-term memory.</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="media">
+        <h2 class="section-title">Media</h2>
+        <div class="media-grid">
+          <div class="media-item">
+            <img src="popsight_screenshot.png" alt="PopSight user interface screenshot" />
+            <div class="meta">
+              <strong>Product Screenshot</strong>
+              <div class="small">The interface used during the hackathon demo.</div>
+            </div>
+          </div>
+          <div class="media-item">
+            <img src="popcrop.png" alt="Hack the Coast 2026 winner photo" />
+            <div class="meta">
+              <strong>Award Photo</strong>
+              <div class="small">Photo from the winning announcement.</div>
+            </div>
+          </div>
+        </div>
+        <div style="margin-top:16px;" class="card">
+          <h3>YouTube Demo</h3>
+          <div class="embed">
+            <iframe
+              src="https://www.youtube.com/embed/ApefYO0QeSg"
+              title="PopSight spoken demo"
+              loading="lazy"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowfullscreen>
+            </iframe>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="card">
+          <h3>Implementation Summary</h3>
+          <p>
+            Built during Hack the Coast 2026 with a team of 3. I focused on the Sourcing Copilot module, especially memory,
+            retrieval, and grounded search over company data. Winner of the Prince of Peace AI Product Discovery & Trend Intelligence track.
+          </p>
+        </div>
+      </section>
+    </main>
+
+    <div class="footer">
+      Project page for PopSight.
+    </div>
+  </div>
+</body>
+</html>
